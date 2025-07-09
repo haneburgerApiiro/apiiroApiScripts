@@ -3,9 +3,6 @@ import requests
 import json
 import configparser
 import warnings
-from urllib3.exceptions import NotOpenSSLWarning
-
-warnings.filterwarnings("ignore", category=NotOpenSSLWarning)
 
 # Load configuration from file
 config = configparser.ConfigParser()
