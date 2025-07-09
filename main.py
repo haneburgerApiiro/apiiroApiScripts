@@ -2,14 +2,36 @@
 from core.auth import get_authenticated_session
 from constants.endpoints import ENDPOINTS
 from utils.jsonValidator import validate_json_data
-
 import json
 
-def main():
-    session = get_authenticated_session()
-    scmRepositories_url = ENDPOINTS["scm_repositories"]
-    response = session.get(scmRepositories_url, params={"limit": 50})
-    
+def getApiiroApplications():
+    session=get_authenticated_session()
+    applications = ENDPOINTS["applications"]
+    response = session.get(applications, params={"limit": 50})
+    if response.status_code == 200:
+        try:
+            data = response.json()
+            jsonData= json.dumps(data, indent=4)
+            print(jsonData)
+        except session.exceptions.JSONDecodeError:
+            print("⚠️ Response was not valid JSON.")
+
+def getApiiroSCMRepositories():
+    session=get_authenticated_session()
+    scm_repositories = ENDPOINTS["scm_repositories"]
+    response = session.get(scm_repositories, params={"limit": 50})
+    if response.status_code == 200:
+        try:
+            data = response.json()
+            jsonData= json.dumps(data, indent=4)
+            print(jsonData)
+        except session.exceptions.JSONDecodeError:
+            print("⚠️ Response was not valid JSON.")
+
+def getApiiroTeams():
+    session=get_authenticated_session()
+    teams = ENDPOINTS["teams"]
+    response = session.get(teams, params={"limit": 50})
     if response.status_code == 200:
         try:
             data = response.json()
@@ -18,5 +40,12 @@ def main():
             print(validate_json_data(jsonData, schema=None))
         except session.exceptions.JSONDecodeError:
             print("⚠️ Response was not valid JSON.")
+
+def main():
+    #getApiiroApplications()
+    #getApiiroSCMRepositories()
+    getApiiroTeams()
+    # Add more function calls here as needed
+
 if __name__ == "__main__":
     main()
