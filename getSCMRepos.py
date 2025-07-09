@@ -9,7 +9,7 @@ config = configparser.ConfigParser()
 config.read("config.ini")
 pat = config.get("AUTH", "MATT_APIIRO_API_TOKEN")
 
-BASE_URL = "https://app-staging.apiiro.com/rest-api/v1"
+BASE_URL = config.get("API", "BASE_URL")
 END_POINT = "/ScmRepositories"
 URL = f"{BASE_URL}{END_POINT}"
 
