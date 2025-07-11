@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 from core.auth import get_authenticated_session
-from constants.endpoints import ENDPOINTS
+from constants.endpoints import INVENTORY_ENDPOINTS
 from utils.jsonValidator import validate_json_data
 import json
 
 def getApiiroApplications():
     session=get_authenticated_session()
-    applications = ENDPOINTS["applications"]
+    applications = INVENTORY_ENDPOINTS["applications"]
     response = session.get(applications, params={"limit": 50})
     if response.status_code == 200:
         try:
@@ -18,7 +18,7 @@ def getApiiroApplications():
 
 def getApiiroSCMRepositories():
     session=get_authenticated_session()
-    scm_repositories = ENDPOINTS["scm_repositories"]
+    scm_repositories = INVENTORY_ENDPOINTS["scm_repositories"]
     response = session.get(scm_repositories, params={"limit": 50})
     if response.status_code == 200:
         try:
@@ -30,7 +30,7 @@ def getApiiroSCMRepositories():
 
 def getApiiroTeams():
     session=get_authenticated_session()
-    teams = ENDPOINTS["teams"]
+    teams = INVENTORY_ENDPOINTS["teams"]
     response = session.get(teams, params={"limit": 50})
     if response.status_code == 200:
         try:
