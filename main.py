@@ -2,19 +2,9 @@
 from core.auth import get_authenticated_session
 from constants.endpoints import INVENTORY_ENDPOINTS
 from utils.jsonValidator import validate_json_data
+from api_modules.Inventory.Applications.main import getApiiroApplications
 import json
 
-def getApiiroApplications():
-    session=get_authenticated_session()
-    applications = INVENTORY_ENDPOINTS["applications"]
-    response = session.get(applications, params={"limit": 50})
-    if response.status_code == 200:
-        try:
-            data = response.json()
-            jsonData= json.dumps(data, indent=4)
-            print(jsonData)
-        except session.exceptions.JSONDecodeError:
-            print("⚠️ Response was not valid JSON.")
 
 def getApiiroSCMRepositories():
     session=get_authenticated_session()
@@ -42,9 +32,9 @@ def getApiiroTeams():
             print("⚠️ Response was not valid JSON.")
 
 def main():
-    #getApiiroApplications()
+    getApiiroApplications()
     #getApiiroSCMRepositories()
-    getApiiroTeams()
+    #getApiiroTeams()
     # Add more function calls here as needed
 
 if __name__ == "__main__":
